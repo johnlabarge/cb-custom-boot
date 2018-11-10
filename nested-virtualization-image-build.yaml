@@ -56,7 +56,7 @@ steps:
 - id: 'cat_startup_script'
   name: ubuntu
   entrypoint: "bash"
-  args: ["-c","cat","agent-install-script"]
+  args: ["-c","cat","agent-install-script.sh"]
   waitFor: 'create_agent_install_script'
 - id: 'create_agent_packer_spec'
   name: ubuntu
