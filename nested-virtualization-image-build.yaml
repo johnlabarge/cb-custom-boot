@@ -54,9 +54,8 @@ steps:
        cp packer /usr/bin/packerio
        STARTUP_SCRIPT
 - id: 'cat_startup_script'
-  name: ubuntu
-  entrypoint: "bash"
-  args: ["-c","cat","agent-install-script.sh"]
+  name: gcr.io/cloud-builders/gsutil
+  args: ["cp","agent-install-script.sh","gs://cloudjlb-cb-custom-boot-test"]
   waitFor: 'create_agent_install_script'
 - id: 'create_agent_packer_spec'
   name: ubuntu
