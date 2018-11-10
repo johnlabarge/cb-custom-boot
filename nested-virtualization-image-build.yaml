@@ -7,7 +7,7 @@ steps:
     -  |
        if [[ -z $(gcloud compute disks list \
            --format='value(name)' \
-           --filter='name=nested-agent-disk)' ]]; then
+           --filter='name=nested-agent-disk)') ]]; then
            gcloud compute disks create nested-agent-disk \
            --image-project centos-cloud \
            --image-family centos-7 \
