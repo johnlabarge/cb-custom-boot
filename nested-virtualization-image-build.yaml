@@ -18,6 +18,7 @@ steps:
        fi
 - id: 'create_nested_virtualization_image'
   name: 'gcr.io/cloud-builders/gcloud'
+  waitFor: ['create_disk_for_nested_image']
   entrypoint: "bash"
   args:
     - '-c'
@@ -29,8 +30,8 @@ steps:
           --source-disk disk1 \
           --source-disk-zone ${_IMAGE_ZONE} \
           --licenses \
-           "https://www.googleapis.com/compute/v1/\
-           projects/vm-options/global/licenses/enable-vmx"
+      "https://www.googleapis.com/compute/v1/\
+      projects/vm-options/global/licenses/enable-vmx"
       else
          echo "nested-agent-disk exists"
          exit 0
