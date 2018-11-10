@@ -90,7 +90,7 @@ steps:
        PACKER_AGENT
 - id: build_agent_image
   waitFor: ['create_agent_packer_spec']
-- name: 'gcr.io/$PROJECT_ID/packer'
+  name: 'gcr.io/$PROJECT_ID/packer'
   args:
   - build
   - -var
