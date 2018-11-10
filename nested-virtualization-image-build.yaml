@@ -89,5 +89,5 @@ steps:
        }
        PACKER_AGENT
 substitutions:
-  _PATH: '$PATH'
+  _PATH: '\$PATH'
 
