@@ -16,31 +16,22 @@ steps:
          echo "nested-agent-disk exists"
          exit 0
        fi
-- id: 'create_nested_virtualization_packer_spec'
-  name: ubuntu
+- id: 'create_nested_virtualization_image'
+  name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: "bash"
   args:
     - '-c'
     - |
-      cat <<END>packer-nested.json
-      {
-      "builders": [
-        {
-          "image_name": "nested-vm-image",
-          "type": "googlecompute",
-          "project_id": "$PROJECT_ID",
-          "source_disk": "nested-agent-disk",
-          "source_disk_zone": "${_IMAGE_ZONE}",
-          "licenses": ["https://www.googleapis.com/compute/v1/\
-          projects/vm-options/global/licenses/enable-vmx"]
-        }
-       ]
-      }
-      END
-- id: 'create_nested_virtualization_image_with_packer'
-  name: 'gcr.io/$PROJECT_ID/packer'
-  args:
-  - build
-  - -var
-  - project_id=$PROJECT_ID
-  - packer-nested.json
+      if [[ -z $(gcloud compute images list \
+          --format='value(name)' \
+          --filter='name=nested-vm-image' ) ]]; then
+          gcloud compute images create nested-vm-image \
+          --source-disk disk1 \
+          --source-disk-zone ${ZONE} \
+          --licenses \
+           "https://www.googleapis.com/compute/v1/\
+           projects/vm-options/global/licenses/enable-vmx"
+      else
+         echo "nested-agent-disk exists"
+         exit 0
+      fi
