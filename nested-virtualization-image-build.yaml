@@ -53,6 +53,11 @@ steps:
        unzip packer_1.3.0_linux_amd64.zip
        cp packer /usr/bin/packerio
        STARTUP_SCRIPT
+- id: 'cat_startup_script'
+  name: ubuntu
+  entrypoint: "bash"
+  args: ["cat","agent-install-script"]
+  waitFor: 'create_agent_install_script'
 - id: 'create_agent_packer_spec'
   name: ubuntu
   entrypoint: "bash"
