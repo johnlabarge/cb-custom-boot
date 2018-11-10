@@ -1,6 +1,6 @@
 steps:
 - id: 'create_disk_for_nested_image'
-- name: 'gcr.io/cloud-builders/gcloud'
+  name: 'gcr.io/cloud-builders/gcloud'
   args:
     - compute
     - disks
