@@ -27,7 +27,7 @@ steps:
           --filter='name=nested-vm-image' ) ]]; then
           gcloud compute images create nested-vm-image \
           --source-disk disk1 \
-          --source-disk-zone ${ZONE} \
+          --source-disk-zone ${_IMAGE_ZONE} \
           --licenses \
            "https://www.googleapis.com/compute/v1/\
            projects/vm-options/global/licenses/enable-vmx"
