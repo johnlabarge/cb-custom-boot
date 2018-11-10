@@ -61,7 +61,7 @@ steps:
     - |
     -  cat <<PACKER_AGENT
        {
-      "builders": [
+       "builders": [
         {
           "image_name": "$(echo packer-agent-$BUILD_ID)",
           "type": "googlecompute",
@@ -80,7 +80,7 @@ steps:
             "https://www.googleapis.com/auth/compute",
             "https://www.googleapis.com/auth/devstorage.full_control"
           ]
-        }
-        ]
-      }
-      PACKER_AGENT
+         }
+         ]
+       }
+       PACKER_AGENT
