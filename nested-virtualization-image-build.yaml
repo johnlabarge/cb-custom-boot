@@ -1,17 +1,21 @@
 steps:
 - id: 'create_disk_for_nested_image'
   name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: 'bash'
   args:
-    - compute
-    - disks
-    - create
-    - nested-agent-disk
-    - --image-project
-    - centos-cloud
-    - --image-family
-    - centos-7
-    - --zone
-    - ${_IMAGE_ZONE}
+    - '-c'
+    -  |
+       if [[ -z $(gcloud compute disks list \
+           --format='value(name)' \
+           --filter='name=nested-agent-disk) ]]; then
+           gcloud compute disks create nested-agent-disk \
+           --image-project centos-cloud \
+           --image-family centos-7 \
+           --zone ${_IMAGE_ZONE}
+       else
+         echo "nested-agent-disk exists"
+         exit 0
+       fi
 - id: 'create_nested_virtualization_packer_spec'
   name: ubuntu
   entrypoint: "bash"
