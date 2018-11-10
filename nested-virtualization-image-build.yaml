@@ -59,7 +59,7 @@ steps:
   args:
     - '-c'
     - |
-    -  cat <<PACKER_AGENT
+    -  cat <<PACKER_AGENT>packer-agent.json
        {
        "builders": [
         {
