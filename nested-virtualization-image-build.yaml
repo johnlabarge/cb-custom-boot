@@ -12,7 +12,7 @@ steps:
     - centos-7
     - --zone
     - ${_IMAGE_ZONE}
-  - id: 'create_nested_virtualization_packer_spec'
+- id: 'create_nested_virtualization_packer_spec'
   name: ubuntu
   entrypoint: "bash"
   args:
