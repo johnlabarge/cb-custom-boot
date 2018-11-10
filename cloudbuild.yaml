@@ -1,6 +1,6 @@
 steps:
 - id: 'create_disk_for_nested_image'
-  name: 'gcr.io/cloud-builders/gcloud'
+- name: 'gcr.io/cloud-builders/gcloud'
   args:
     - compute
     - disks
@@ -12,9 +12,9 @@ steps:
     - centos-7
     - --zone
     - ${_IMAGE_ZONE}
-
-  - id: 'create_nested_virtualization_packer_spec'
-  name: ubuntu
+steps:
+- name: ubuntu 
+  id: 'nested_virtualization_spec'
   entrypoint: "bash"
   args:
     - '-c'
@@ -34,10 +34,11 @@ steps:
        ]
       }
       END
-- id: 'create_nested_virtualization_image_with_packer'
-  name: 'gcr.io/$PROJECT_ID/packer'
+- id: packer_nested_image
+- name: 'gcr.io/$PROJECT_ID/packer'
   args:
   - build
   - -var
   - project_id=$PROJECT_ID
   - packer-nested.json
+
